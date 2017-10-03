@@ -5,18 +5,17 @@ Interval {{ .Env "COLLECTD_INTERVAL" }}
 Timeout 2
 ReadThreads 5
 
-LoadPlugin write_graphite
-<Plugin "write_graphite">
-    <Carbon>
-        Host "{{ .Env "GRAPHITE_HOST" }}"
-        Port "{{ .Env "GRAPHITE_PORT" }}"
-        Protocol "tcp"
-        Prefix "{{ .Env "GRAPHITE_PREFIX" }}"
+LoadPlugin write_http
+<Plugin write_http>
+    <Node "node1">
+        URL "https://"{{ .Env "SPLUNK_HOST" }}":"{{ .Env "HTTP_PORT" }}"/services/collector/raw"
+        Header "Authorization: Splunk "{{ .Env "HEC_TOKEN" }}""
+        Format "JSON"
+        VerifyPeer false
+        VerifyHost false
+        Metrics true
         StoreRates true
-        EscapeCharacter "."
-        AlwaysAppendDS false
-        SeparateInstances true
-    </Carbon>
+    </Node>
 </Plugin>
 
 LoadPlugin exec

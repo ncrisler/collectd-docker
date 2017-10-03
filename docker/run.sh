@@ -12,6 +12,10 @@ export GRAPHITE_PORT=${GRAPHITE_PORT:-2003}
 export GRAPHITE_PREFIX=${GRAPHITE_PREFIX:-collectd.}
 export COLLECTD_INTERVAL=${COLLECTD_INTERVAL:-10}
 
+export SPLUNK_HOST=${SPLUNK_HOST}
+export HTTP_PORT=${HTTP_PORT}
+export HEC_TOKEN=${HEC_TOKEN}
+
 # Adding a user if needed to be able to communicate with docker
 GROUP=nobody
 if [ -e /var/run/docker.sock ]; then
